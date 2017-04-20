@@ -1,0 +1,45 @@
+{
+  "name": "angular4stack",
+  "version": "0.0.1",
+  "description": "Experimental Angular 4-based stack",
+  "private": true,
+  "scripts": {
+    "preserve": "npm run build",
+    "serve": "node src/server/index",
+    "dev": "node_modules/grunt/bin/grunt build:dev && scripts/run_server_dev.sh",
+    "build": "node_modules/typescript/bin/tsc -p src/client",
+    "build:watch": "node_modules/typescript/bin/tsc -p src/client -w",
+    "build:e2e": "node_modules/typescript/bin/tsc -p e2e/",
+    "pree2e": "npm run build:e2e",
+    "e2e": "concurrently \"npm run serve:e2e\" \"npm run protractor\" --kill-others --success first",
+    "preprotractor": "webdriver-manager update",
+    "protractor": "protractor protractor.config.js",
+    "pretest": "npm run build",
+    "test": "concurrently \"npm run build:watch\" \"karma start karma.conf.js\"",
+    "pretest:once": "npm run build",
+    "test:once": "karma start karma.conf.js --single-run",
+    "jshint:server": "node_modules/jshint/bin/jshint src/server --config src/server/.jshintrc || exit 0"
+  },
+  "author": "Nicola Orritos",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^1.6.6",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.5.47",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-symlink": "^1.0.0",
+    "grunt-ts": "^6.0.0-beta.15",
+    "jasmine-core": "^2.5.2",
+    "jshint": "^2.9.4",
+    "karma": "^1.6.0",
+    "karma-jasmine": "^1.1.0",
+    "load-grunt-tasks": "^3.5.2",
+    "protractor": "^5.1.1",
+    "typescript": "^2.2.2"
+  }
+}
